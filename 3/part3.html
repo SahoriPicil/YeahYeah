@@ -37,20 +37,17 @@
 
     .links-overlay {
       position: absolute;
-      font-family: pixelify sans, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      top: 15px;
-      left: 12px;
-      right: 12px;
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
-      pointer-events: none;
+      justify-content: center;
+      /* quitamos pointer-events:none */
     }
 
     .links-overlay a {
-      pointer-events: auto;
       text-decoration: none;
       color: white;
-      margin-top: 350px;
       width: 100px;
       height: 100px;
       border-radius: 50%;
@@ -74,7 +71,9 @@
   <div class="phone-frame">
     <canvas></canvas>
     <div class="links-overlay">
-      <a href="https://tu-pagina.com"></a>
+      <a href="https://tu-pagina.com">
+        <span style="visibility:hidden;">Ir</span>
+      </a>
     </div>
   </div>
 </body>
