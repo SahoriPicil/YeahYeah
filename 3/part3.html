@@ -1,159 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
-    <title>Document</title>
-    
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Canvas con fondo y enlace</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:100vh;
+      margin:0;
+      background:#f3f4f6;
+    }
+
+    .phone-frame {
+      position: relative;
+      width: 360px;
+      height: 800px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      border-radius: 20px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    canvas {
+      display:block;
+      width: 360px;
+      height: 800px;
+      touch-action: none;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .links-overlay {
+      position: absolute;
+      font-family: pixelify sans, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      top: 15px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    .links-overlay a {
+      pointer-events: auto;
+      text-decoration: none;
+      color: white;
+      margin-top: 350px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease;
+      background-image: url('corazon.png'); /* tu imagen de corazón */
+    }
+
+    .links-overlay a:hover {
+      transform: scale(1.1);
+    }
+  </style>
 </head>
 <body>
-        <!DOCTYPE html>
-    <html lang="es">
-    <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>Canvas con fondo y enlaces</title>
-      <style>
-        body {
-          font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          min-height:100vh;
-          margin:0;
-          background:#f3f4f6;
-        }
-    
-        .phone-frame {
-          position: relative;
-          width: 360px; /* ancho CSS de "pantalla de móvil promedio" */
-          height: 800px; /* alto CSS de "pantalla de móvil promedio" */
-          box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-          border-radius: 20px;
-          overflow: hidden;
-          background: #000;
-        }
-    
-        canvas {
-          display:block;
-          width: 360px;
-          height: 800px;
-          touch-action: none;
-          -webkit-user-select: none;
-          user-select: none;
-          -webkit-tap-highlight-color: transparent;
-        }
-    
-        /* Contenedor para los enlaces (texto side-by-side) */
-        .links-overlay {
-          position: absolute;
-          margin-left: 120px;
-          font-family: pixelify sans, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-          top: 15px;
-          left: 12px;
-          right: 12px;
-          display: flex;
-          gap: 12px;
-          align-items: center;
-          pointer-events: none; /* por defecto, permitir clics sólo en los enlaces */
-        }
-    
-        .links-overlay a {
-          pointer-events: auto;
-          text-decoration: none;
-          color: white;
-          margin-top: 350px;
-          width: 100px;
-          height: 100px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background-size: cover;
-          background-position: center;
-          background-repeat: no-repeat;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-          transition: transform 0.2s ease;
-        }
-
-        .links-overlay a:hover {
-          transform: scale(1.1);
-        }
-
-        .links-overlay a:first-child {
-          background-image: url('corazon.png'); /* reemplaza con tu imagen */
-        }
-
-    
-        /* Ajustes responsivos opcionales para pantallas muy pequeñas */
-        @media (max-width: 380px) {
-          .phone-frame { transform: scale(0.95); transform-origin: center; }
-        }
-      </style>
-    </head>
-    <body>
-      <div class="phone-frame">
-        <canvas id="phoneCanvas" width="360" height="800" aria-label="Canvas simulando pantalla de móvil"></canvas>
-    
-        <div class="links-overlay" role="navigation" aria-label="Enlaces principales">
-          <a href="https://sahoripicil.github.io/YeahYeah/4/part4.html" rel="noopener noreferrer"></a>
-        </div>
-      </div>
-    
-      <script>
-        (function () {
-          const canvas = document.getElementById('phoneCanvas');
-          const ctx = canvas.getContext('2d');
-    
-          // Dimensiones lógicas (CSS pixels) que pediste: 360x800
-          const cssWidth = 360;
-          const cssHeight = 800;
-    
-          // Ajuste para pantallas de alta densidad (hi-dpi)
-          const dpr = Math.max(1, window.devicePixelRatio || 1);
-          canvas.width = cssWidth * dpr;
-          canvas.height = cssHeight * dpr;
-          canvas.style.width = cssWidth + 'px';
-          canvas.style.height = cssHeight + 'px';
-          ctx.scale(dpr, dpr);
-    
-          // Cargar imagen de fondo (puedes cambiar la URL)
-          const bg = new Image();
-          bg.src = "3.png"; // imagen de ejemplo (PNG); reemplaza por tu URL
-    
-          bg.onload = () => {
-            // Dibujar la imagen cubriendo todo el canvas (sin deformar)
-            // Aquí la escalamos exactamente al tamaño CSS (360x800)
-            ctx.drawImage(bg, 0, 0, cssWidth, cssHeight);
-    
-            // Ejemplo de dibujo adicional: un sutil degradado superior para legibilidad del texto
-            const g = ctx.createLinearGradient(0, 0, 0, 140);
-            g.addColorStop(0, 'rgba(0,0,0,0.45)');
-            g.addColorStop(1, 'rgba(0,0,0,0)');
-            ctx.fillStyle = g;
-            ctx.fillRect(0, 0, cssWidth, 140);
-          };
-    
-          bg.onerror = () => {
-            // Fallback si la imagen falla: dibujar un degradado
-            const g = ctx.createLinearGradient(0, 0, 0, cssHeight);
-            g.addColorStop(0, '#667eea');
-            g.addColorStop(1, '#764ba2');
-            ctx.fillStyle = g;
-            ctx.fillRect(0, 0, cssWidth, cssHeight);
-          };
-    
-          // Evitar zoom o desplazamiento accidental en móviles al tocar el canvas
-          canvas.addEventListener('touchstart', (e) => { e.preventDefault(); }, { passive: false });
-        })();
-      </script>
-    </body>
-    </html>
+  <div class="phone-frame">
+    <canvas></canvas>
+    <div class="links-overlay">
+      <a href="https://tu-pagina.com"></a>
+    </div>
+  </div>
 </body>
-
 </html>
-
-
