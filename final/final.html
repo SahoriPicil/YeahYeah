@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>GIF Animado</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f3f4f6;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto;
+        }
+
+        .phone-frame {
+            position: relative;
+            width: 360px;
+            height: 800px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            background: #000;
+        }
+
+        #gifSource {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Responsive para móviles */
+        @media (max-width: 480px) {
+            .phone-frame {
+                width: 100vw;
+                height: 100vh;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-frame">
+        <!-- GIF animado - reemplaza 'feli.gif' con tu archivo -->
+        <img id="gifSource" src="feli.gif" alt="GIF animado">
+    </div>
+
+    <script>
+        console.log('GIF listo. Abriendo en móvil...');
+    </script>
+</body>
+</html>
